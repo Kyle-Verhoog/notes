@@ -21,7 +21,7 @@ Which is equivalent to
 `(\star\star)` if `n` `\geq \sqrt(1388 \cdot 2 \div c)` then `1388 \leq n^2 \cdot c/2`
 
 if n \geq \max(2010 \cdot 2 \div c, \radic(1388 \cdot 2 \div c), both (\star) and (\star\star)
-
+`
 * Module 3: Sorting and Randomized Algorithms 
 ** Selection vs. Sorting
 - The *selection problem* is: Given an array A of n numbers and 0 \le k \lt n fint the element in position k of the sorted array
@@ -216,4 +216,4 @@ nlog(n) = log(n!) \approx nlogn - log((n/e)^n) = nlogn - n log(n/e) = nlogn - nl
   - 2c 
   - 4: tortoise is hard to analyze. Examine the ratio Tortoise/k try to k/2, k/3, should see a pattern
     compare run-times for achilles and tortoise for large values of k
-  - 5: c) consider two iterations of the while loop.
+  - 5: c) consider two iterations of the while loop.`
