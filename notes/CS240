@@ -5,38 +5,39 @@ Notes
 
 In order to prove, we need to show the existence of constants `c, n_0`
 
-`\forall.n \ge 1,  m^2 \ge n \ge 1`
+`forall n ge 1,  m^2 \ge n \ge 1`
 
-`\rarr 11 \le 11n^2`
+`rarr 11 le 11n^2`
 
-`\rarr 3n \le 3n^2`
+`rarr 3n le 3n^2`
 
-`\rarr 2n^2 \le 2n^2 \rarr f(n) \le 16n^2`
+`rarr 2n^2 le 2n^2 rarr f(n) le 16n^2`
 
 *** Example of Order Notation (Slide 24)
-*Prove:* `f(n) = 2010n^2 + 1388n^2 \in o(n^3)`
+*Prove:* `f(n) = 2010n^2 + 1388n^2 in o(n^3)`
 
 
-We need to prove: `\forall.c, \exists.n_0` such that `2010n^2 + 1388n^2 \leq cn^3,  \forall n\geq n_0`.
+We need to prove: `forall c, exists n_0` such that `2010n^2 + 1388n^2 leq cn^3,  forall n geq n_0`.
 
 
-We prove `\forall.c, \exists.n_0` such that `2010n^2 \leq c/2 \cdot n^3, 1388n \leq c/2 \cdot n^3`
+We prove `forall c, exists n_0` such that `2010n^2 leq c/2 cdot n^3, 1388n leq c/2 cdot n^3`
 
 Which is equivalent to
 
-`2010 \leq c/2 \cdot n (\star)` and `1388 \leq c/2 \cdot n^2 (\star\star)`
+`2010 leq c/2 \cdot n (\star)` and `1388 \leq c/2 \cdot n^2 (\star\star)`
 
-`(\star)` if `n \geq 2010\cdot2 \div c` then `2010 \leq n \cdot c/2`
-`(\star\star)` if `n` `geq sqrt((1388cdot2) / c)` then `1388 \leq n^2 \cdot c/2`
+`(\star)` if `n \geq 2010\cdot2 \div c` then `2010 leq n \cdot c/2`
 
-if `n geq \max((2010 cdot 2)/c, sqrt((1388 \cdot 2)/c), `both `(\star)` and `(\star\star)`
+`(\star\star)` if `n` `geq sqrt((1388cdot2) / c)` then `1388 leq n^2 \cdot c/2`
+
+if `n geq \max((2010 cdot 2)/c, sqrt((1388 \cdot 2)/c)), `both `(\star)` and `(\star\star)`
 
 * Sorting and Randomized Algorithms 
 ** Selection vs. Sorting
 - The *selection problem* is: Given an array `A` of `n` numbers and `0 \le k \lt n` find the element in position `k` of the sorted array
 - *Observation:* the kth largest element is the element at position `n-k`
-- Best heap-based algorithm had time cost `Theta(n + klog(n))`
-- Median selection: `k = floor(n/2),` giving cost `Theta(nlog(n))`
+- Best heap-based algorithm had time cost `Theta(n + klog\n\)`
+- Median selection: `k = floor(n/2),` giving cost `Theta(nlog\n\)`
 - *Can we do selection in linear time?*
   - Quick-select can do this
 - Finding the element at a given position is tough but finding the position of a given element is simple
@@ -45,7 +46,7 @@ if `n geq \max((2010 cdot 2)/c, sqrt((1388 \cdot 2)/c), `both `(\star)` and `(\s
 ***** choose-pivot(A) 
 choose an index i such that A[i] will make a good pivot
 ***** partition(A,p) 
-Using pivot A[p] rearrange A so that all items \leq the pivot come first, followed by the pivot, followed by all items greater than the pivot
+Using pivot A[p] rearrange A so that all items leq the pivot come first, followed by the pivot, followed by all items greater than the pivot
 ***** Example 1
 A = {2, 4, 1, 3, 0}, p = A[0] = 2
 
@@ -77,12 +78,12 @@ pivot(A):
 parition(A,p)
   A: array of size n, p: integer s.t. 0 \le p \lt n
   swap(A[0], A[p])
-  i `larr` 1. j `larr` n - 1
+  i <- 1. j <- n - 1
   loop
-    while i < n and A[i] `le` A[0] do
-      i `larr` i + 1
-    while j `ge` 1 and A[j] > A[0] do
-      j `larr` j - 1
+    while i < n and A[i] <= A[0] do
+      i <- i + 1
+    while j >= 1 and A[j] > A[0] do
+      j <- j - 1
     if j < i then break
     else swap(A[i], A[j])
   end loop
@@ -92,22 +93,31 @@ parition(A,p)
 **** Proof of termination
 Claim: if we reach Step 9, then `lt` n and A[i] > A[0] `ge` A[j] j `ge` 1
 
-*Proof* if we are at Step 9, then i \leq j.
- We always have j \leq n-1 and i \ge 1
- i \leq j \rArr  n \leq n-1 so A[i] \gt A[0] (1st while finished)
- i \leq j \rArr  j \ge 1   so A[j] \leq A[0] (2nd while finished)
-\rarr after the swap back in the while loops, i will be incremented at least once
-\rarr after the swap back in the while loops, j will be decremented at least once
+*Proof* if we are at Step 9, then i  leq` j.
+ We always have j `leq` n-1 and i `ge` 1
+ 
+ i `leq` j `\rArr`  n `leq` n-1 so A[i] `gt` A[0] (1st while finished)
+ 
+ i `leq` j `rArr` j `ge` 1   so A[j] `leq` A[0] (2nd while finished)
+ 
+`rarr` after the swap back in the while loops, i will be incremented at least once
+
+`rarr` after the swap back in the while loops, j will be decremented at least once
+
 thus the algorithm terminates
-*Correctness* proof by induction that when we enter the loop at step 3, all values
-A[i'] for 1 \leq i' \lt i are at most A[0]
-A[j'] for j \lt j' \le j - n  are at most  \gt  A[0]
+
+*Correctness:* proof by induction that when we enter the loop at step 3, all values
+
+A[i'] for 1 `leq` i' `lt` i are at most A[0]
+
+A[j'] for j `lt` j' `le` j - n  are at most `gt`  A[0]
+
 **** QuickSelect Algorithm
 #+BEGIN_SRC pseudo
 quick-select(A,k)
   A: array of size n, k: integer s.t. 0 \le k \lt n
-  p \larr choose-pivot(A)
-  i \larr partition(A, p)
+  p `larr` choose-pivot(A)
+  i `larr` partition(A, p)
   if i = k then
     return A[i]
   else if i > k then
@@ -116,17 +126,20 @@ quick-select(A,k)
     return quick-select(A[i+1, i+2...n-1], k-i-1)
 #+END_SRC
 ***** Analysis
-***** Worst-case analysis 
+****** Worst-case analysis 
 Recursive call could always have size n-1
 
-Recurrence given by T(n) = { T(n-1) + cn, n \ge 2
-                             d,           n = 1
-Solution: T(n) = cn + c(n-1) + c(n-2) + ... + c \cdot 2 + d \in \Theta(n^2)
+Recurrence given by `T(n) = T(n-1) + cn, n ge 2, d,` if `n = 1`.
+
+Solution: `T(n) = cn + c(n-1) + c(n-2) + ... + c cdot 2 + d \in \Theta(n^2)`
 ****** Example
 A = {4, 1, 2, 3, 0} -parition-> {3, 1, 0, 2, 4} -> {2, 1, 0, 3} -> {1, 0, 2} -> {0, 1} -> [0]
+
                       5 \cdot c                   4 \cdot c            3 \cdot c         2 \cdot c    1 \cdot c    d = 15c + d
+                      
 ***** Best-case analysis
 First chosen pivot chould be the k-th element No recursive calls; total cost is \Theta(n)
+
 ****** Example
 k = 0
 A = {0, 4, 1, 3, 2} -parition-> {0, 4, 1, 3, 2} 
@@ -136,7 +149,9 @@ linear time
 - Assume all n! permutations are equally likely
 - Average cost is sum of costs for all permutations divided by n!
 - Define T(n,k) as average cost for selecting kth item from size-n array:
-T(n, k) = cn + 1/n (\sum_i=0^{k-1} T(n-i-1, k-i-1) + \sum_{i=k+1}^{n-1} T(i,k))
+
+`T(n, k) = cn + 1/n (sum_{i=0}^{k-1} T(n-i-1, k-i-1) + sum_{i=k+1}^{n-1} T(i,k))`
+
 - We could analyze this recurrence directly or be a little lazier and still get the same asymptotic result
 - For simplicity, define T(n) = max T(n,k)
 * Module 4: Self balancing tree and 
@@ -166,36 +181,45 @@ By contradiction assume both have height h+1. Assume the leaf we inserted is in 
 ** Tutorial 0
 - LaTeX. gg.
 ** Tutorial 1 
-*** Problem 1. Prove that n^2 - 3n \in \Omega(n^2)
-   we need a constant c, such that cn^2 \le n^2 - 3n. 
-   choose c = 1/2. then 1/2n^2 \le n^2 - 3n, solve to get n_0 = 6.
-*** Problem 2. Prove 12n^3 + 11n^2 + 10 \in O(n^3)
-   12n^3 + 11n^2 + 10 \leq cn^3
-   12n^3 + 11n^3 + 10n^3 \leq cn^3
-   c = 33
-   n_0 = 1
-*** Problem 3. Prove 2^n \in \omega(n^50)
-   2^n > cn^50
-   log(2^n) > log(cn^50)
-   n > log(c) + 50log(n)
-   n > x + y
-   n/2 + n/2 > log(c) + 50log(n)
-
-   (1) n/2 > log(c) \rarr n > 2log(n)
-   (2) n/2 > 50log(n) \rarr n > 100 log(n) \rarr n = 2^10
+*** Problem 1. Prove that `n^2 - 3n \in \Omega(n^2)`
+   we need a constant `c`, such that `cn^2 \le n^2 - 3n.`
+   choose `c = 1/2`. then `1/2n^2 \le n^2 - 3n,` solve to get `n_0 = 6.`
+*** Problem 2. Prove `12n^3 + 11n^2 + 10 \in O(n^3)`
+   `12n^3 + 11n^2 + 10 leq cn^3`
    
-   choose n_0 = max(2log(c), 2^10)
+   `12n^3 + 11n^3 + 10n^3 leq cn^3`
+   
+   `c = 33`
+   
+   `n_0 = 1`
+*** Problem 3. Prove `2^n \in \omega(n^50)`
+   `2^n > cn^50`
+   
+   `log(2^n) > log(cn^50)`
+   
+   `n > log(c) + 50log(n)`
+   
+   `n > x + y`
+   
+   `n/2 + n/2 > log(c) + 50log(n)`
+
+   `(1) n/2 > log(c) \rarr n > 2log(n)`
+   
+   `(2) n/2 > 50log(n) \rarr n > 100 log(n) \rarr n = 2^10`
+   
+   choose `n_0 = max(2log(c), 2^10)`
+   
 *** Problem 4. log(n!) \in \Theta(nlogn)
  Upper bound
-   log(n!) = log(n \cdot n-1 \cdot ... \cdot 1) = log(n) + log(n-1) + ... + log(1)
-           = \sum_i=1^n log(i)
-   \sum_i=1^n log(n) = log(n) + log(n) + ... + log(n) = nlog(n) \in O(nlogn)
+   `log(n!) = log(n \cdot n-1 \cdot ... \cdot 1) = log(n) + log(n-1) + ... + log(1) = \sum_i=1^n log(i)`
+           
+   `\sum_i=1^n log(n) = log(n) + log(n) + ... + log(n) = nlog(n) \in O(nlogn)`
 
  Lower Bound
-   log(n!) = \sum_i=1^n log(i)
-           = \sum_i=n/2+1^n log(i) \ge \sum_i=n/2+1^n log(n/2) = n/2log(n/2) \in \Omega(nlogn)
+   `log(n!) = \sum_i=1^n log(i) = \sum_i=n/2+1^n log(i) \ge \sum_i=n/2+1^n log(n/2) = n/2log(n/2) \in \Omega(nlogn)`
 
-   Therefore log(n!) \in \Theta(nlogn)
+   Therefore `log(n!) \in \Theta(nlog\n\)`
+   
 *** Problem 5. Algorithm Analysis
 n:=1
 for i = 1 to n/3
@@ -208,24 +232,32 @@ for i = 1 to n/3
 = \sum_i=1^n/3(cn^2/9) = cn^3/27 \in \Theta(n^3)
 
 *** Problem 6. Algorithm Analysis (Harder)
+#+BEGIN_SRC pseudo
 for i = 1 to n
   j := i
   while j < n
     j = 2*j
+#+END_SRC
 
-After t iterations of the while loop j will be i*2^t. 
-Suppose t is the final iteration: n \leq j = i\cdot2^t 
-  log n \leq log(i\cdot2^t) = log(i)+log(2^t) = log(i) + t
-\rarr t \ge log(n) - log(i)
-\rarr t \ge log(n/i)
+After `t` iterations of the while loop `j` will be `i*2^t.`
+Suppose `t` is the final iteration: `n leq j = i\cdot2^t`
+  `log n leq log(i\cdot2^t) = log(i)+log(2^t) = log(i) + t`
+  
+`\rarr t \ge log(n) - log(i)`
+
+`\rarr t \ge log(n/i)`
 
 So we have
-\sum_i=1^n log(n/i)
-= \sum_i=1^n log(n) - log(i)
-= \sum_i=1^n log(n) - \sum_i=1^n log(i)
-= nlog(n) - log(n!)
+`\sum_i=1^n log(n/i)`
+
+`= \sum_i=1^n log(n) - log(i)`
+
+`= \sum_i=1^n log(n) - \sum_i=1^n log(i)`
+
+`= nlog(n) - log(n!)`
+
 Note: n! > (n/e)^n
-nlog(n) = log(n!) \approx nlogn - log((n/e)^n) = nlogn - n log(n/e) = nlogn - nlogn - nloge = nlog(e) \in \Theta(n)
+`nlog(n) = log(n!) \approx nlogn - log((n/e)^n) = nlogn - n log(n/e) = nlogn - nlogn - nloge = nlog(e) \in \Theta(n)`
 
 *** Notes about Assignment 1
 - Difficult questions:
