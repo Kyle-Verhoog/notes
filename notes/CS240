@@ -1,19 +1,19 @@
-* CS240
-*** Assignments
-**** DONE [[file:2B/CS240/a0/a0.pdf][Assignment 0]]
+CS240
+* Assignments
+** DONE [[file:2B/CS240/a0/a0.pdf][Assignment 0]]
 CLOSED: [2016-01-06 Wed 16:31] DEADLINE: <2016-01-13 Wed 17:00>
-**** TODO [[file:2B/CS240/a1/a1.pdf][Assignment 1]]
+** TODO [[file:2B/CS240/a1/a1.pdf][Assignment 1]]
 DEADLINE: <2016-01-20 Wed 17:00>
-*** Notes 
-**** Module 1: Intro to Asymptotic Analysis [2016-01-05 Tues]
-***** Example of Order Notation (Side 23)
+* Notes 
+** Module 1: Intro to Asymptotic Analysis [2016-01-05 Tues]
+*** Example of Order Notation (Side 23)
 f(n) = 2n^2 + 3n + 11 \in O(n^2)
 In order to prove, we need to show the existence of a constant c and n_0 
 \forall.n \ge 1,  m^2 \ge n \ge 1
 \rarr 11 \le 11n^2
 \rarr 3n \le 3n^2
 \rarr 2n^2 \le 2n^2 \rarr f(n) \le 16n^2 
-***** Example of Order Notation (Slide 24)
+*** Example of Order Notation (Slide 24)
 f(n) = 2010n^2 + 1388n^2 \in o(n^3)
 Need to prove: \forall.c, \exists.n_0 $ such that $2010n^2 + 1388n^2 \leq cn^3,  \forall n\geq n_0
 We prove \forall.c, \exists.n_0 such that $2010n^2 \leq c/2 \cdot n^3, 1388n \leq c/2 \cdot n^3
@@ -26,8 +26,8 @@ Which is equivalent to
 
 if n \geq \max(2010 \cdot 2 \div c, \radic(1388 \cdot 2 \div c), both (\star) and (\star\star)
 
-**** Module 3: Sorting and Randomized Algorithms 
-***** Selection vs. Sorting
+** Module 3: Sorting and Randomized Algorithms 
+*** Selection vs. Sorting
 - The *selection problem* is: Given an array A of n numbers and 0 \le k \lt n fint the element in position k of the sorted array
 - *Observation:* the kth largest element is the element at position n-k
 - Best heap-based algorithm had time cost \Theta(n + klogn)
@@ -35,13 +35,13 @@ if n \geq \max(2010 \cdot 2 \div c, \radic(1388 \cdot 2 \div c), both (\star) an
 - *Can we do selection in linear time?*
   - Quick-select can do this
 - Finding the element at a given position is tough but finding the position of a given element is simple
-***** Quick Select
-****** Two routines
-******* choose-pivot(A) 
+**** Quick Select
+***** Two routines
+****** choose-pivot(A) 
 choose an index i such that A[i] will make a good pivot
-******* partition(A,p) 
+****** partition(A,p) 
 Using pivot A[p] rearrange A so that all items \leq the pivot come first, followed by the pivot, followed by all items greater than the pivot
-******* Examples
+****** Examples
 A = {2, 4, 1, 3, 0}, p = A[0] = 2
 P = {1, 0, 2, 3, 4}
        \leq   =   \gt 
@@ -51,14 +51,14 @@ A = {2, 4, 1, 3, 0}, p = A[1] = 4
 P = {3, 2, 0, 1, 4}
               \leq  =
 This is not a good choice of pivot
-****** Selecting a pivot
+***** Selecting a pivot
 - Ideally, we pick the median to be the pivot
 - *First idea* choose the first element in the array
 #+BEGIN_SRC pseudo
 pivot(A):
   return 0
 #+END_SRC
-****** Partition algorithm
+***** Partition algorithm
 *Idea* keep swapping the outer-most wrongly-positioned pairs
 #+BEGIN_SRC pseudo
 parition(A,p)
@@ -76,7 +76,7 @@ parition(A,p)
   swap(A[0], A[j])
   return j
 #+END_SRC
-****** Proof of termination
+***** Proof of termination
 Claim: if we reach Step 9, then \lt n and A[i] > A[0] \ge A[j] j \ge 1
 
 *Proof* if we are at Step 9, then i \leq j.
@@ -89,7 +89,7 @@ thus the algorithm terminates
 *Correctness* proof by induction that when we enter the loop at step 3, all values
 A[i'] for 1 \leq i' \lt i are at most A[0]
 A[j'] for j \lt j' \le j - n  are at most  \gt  A[0]
-****** QuickSelect Algorithm
+***** QuickSelect Algorithm
 #+BEGIN_SRC pseudo
 quick-select(A,k)
   A: array of size n, k: integer s.t. 0 \le k \lt n
@@ -102,43 +102,43 @@ quick-select(A,k)
   else if i < k then
     return quick-select(A[i+1, i+2...n-1], k-i-1)
 #+END_SRC
-******* Analysis
-******** Worst-case analysis 
+****** Analysis
+******* Worst-case analysis 
 Recursive call could always have size n-1
 
 Recurrence given by T(n) = { T(n-1) + cn, n \ge 2
                              d,           n = 1
 Solution: T(n) = cn + c(n-1) + c(n-2) + ... + c \cdot 2 + d \in \Theta(n^2)
-********* Example
+******** Example
 A = {4, 1, 2, 3, 0} -parition-> {3, 1, 0, 2, 4} -> {2, 1, 0, 3} -> {1, 0, 2} -> {0, 1} -> [0]
                       5 \cdot c                   4 \cdot c            3 \cdot c         2 \cdot c    1 \cdot c    d = 15c + d
-******** Best-case analysis
+******* Best-case analysis
 First chosen pivot chould be the k-th element No recursive calls; total cost is \Theta(n)
-********* Example
+******** Example
 k = 0
 A = {0, 4, 1, 3, 2} -parition-> {0, 4, 1, 3, 2} 
 linear time
 
-******** Average-case analysis
+******* Average-case analysis
 - Assume all n! permutations are equally likely
 - Average cost is sum of costs for all permutations divided by n!
 - Define T(n,k) as average cost for selecting kth item from size-n array:
 T(n, k) = cn + 1/n (\sum_i=0^{k-1} T(n-i-1, k-i-1) + \sum_{i=k+1}^{n-1} T(i,k))
 - We could analyze this recurrence directly or be a little lazier and still get the same asymptotic result
 - For simplicity, define T(n) = max T(n,k)
-**** Self balancing trees
-***** AVL Trees
+*** Self balancing trees
+**** AVL Trees
 - An AVL Tree is a BST with an additional structure property
   - The heights of the left and right subtree differ at at most 1
   - Note: the height of an empty tree is defined to be -1
 - At each non-empty node, we store height(R) - height(L) \in {-1,0,1}
-****** Rotations
-******* Pseudocode
+***** Rotations
+****** Pseudocode
 rotate-right(T):
 T: AVL tree
 1.  newroot \larr T.left
 2.  T.left \larr newroot.right
-******* Proof of balance following a rotation
+****** Proof of balance following a rotation
 Suppose z is the first node we find which is not balanced. Suppose that the balance is -2 (the case 2 is symmetric).
       (z)
      /   \
@@ -148,19 +148,19 @@ h+2(y)   /c\ h
 then we cannot have height(A) = height(B) = h+1.
 
 By contradiction assume both have height h+1. Assume the leaf we inserted is in A.
-*** Tutorials
-**** Tutorial 0 <2016-01-11 Mon> 
+* Tutorials
+** Tutorial 0 <2016-01-11 Mon> 
 - LaTeX. gg.
-**** Tutorial 1 
-***** Problem 1. Prove that n^2 - 3n \in \Omega(n^2)
+** Tutorial 1 
+*** Problem 1. Prove that n^2 - 3n \in \Omega(n^2)
    we need a constant c, such that cn^2 \le n^2 - 3n. 
    choose c = 1/2. then 1/2n^2 \le n^2 - 3n, solve to get n_0 = 6.
-***** Problem 2. Prove 12n^3 + 11n^2 + 10 \in O(n^3)
+*** Problem 2. Prove 12n^3 + 11n^2 + 10 \in O(n^3)
    12n^3 + 11n^2 + 10 \leq cn^3
    12n^3 + 11n^3 + 10n^3 \leq cn^3
    c = 33
    n_0 = 1
-***** Problem 3. Prove 2^n \in \omega(n^50)
+*** Problem 3. Prove 2^n \in \omega(n^50)
    2^n > cn^50
    log(2^n) > log(cn^50)
    n > log(c) + 50log(n)
@@ -171,7 +171,7 @@ By contradiction assume both have height h+1. Assume the leaf we inserted is in 
    (2) n/2 > 50log(n) \rarr n > 100 log(n) \rarr n = 2^10
    
    choose n_0 = max(2log(c), 2^10)
-***** Problem 4. log(n!) \in \Theta(nlogn)
+*** Problem 4. log(n!) \in \Theta(nlogn)
  Upper bound
    log(n!) = log(n \cdot n-1 \cdot ... \cdot 1) = log(n) + log(n-1) + ... + log(1)
            = \sum_i=1^n log(i)
@@ -182,7 +182,7 @@ By contradiction assume both have height h+1. Assume the leaf we inserted is in 
            = \sum_i=n/2+1^n log(i) \ge \sum_i=n/2+1^n log(n/2) = n/2log(n/2) \in \Omega(nlogn)
 
    Therefore log(n!) \in \Theta(nlogn)
-***** Problem 5. Algorithm Analysis
+*** Problem 5. Algorithm Analysis
 n:=1
 for i = 1 to n/3
   for j = n/3 to 2n/3
@@ -193,7 +193,7 @@ for i = 1 to n/3
 = \sum_{i=1}^n/3\sum_j=n/3^2n/3(cn/3)
 = \sum_i=1^n/3(cn^2/9) = cn^3/27 \in \Theta(n^3)
 
-***** Problem 6. Algorithm Analysis (Harder)
+*** Problem 6. Algorithm Analysis (Harder)
 for i = 1 to n
   j := i
   while j < n
@@ -213,7 +213,7 @@ So we have
 Note: n! > (n/e)^n
 nlog(n) = log(n!) \approx nlogn - log((n/e)^n) = nlogn - n log(n/e) = nlogn - nlogn - nloge = nlog(e) \in \Theta(n)
 
-***** Notes about Assignment 1
+*** Notes about Assignment 1
 - Difficult questions:
   - 1d: split apart ab < cd, a < c, b < d
   - 2c 
