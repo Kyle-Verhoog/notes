@@ -203,7 +203,7 @@ By contradiction assume both have height h+1. Assume the leaf we inserted is in 
    
    choose `n_0 = max(2log(c), 2^10)`
    
-*** Problem 4. log(n!) \in \Theta(nlogn)
+*** Problem 4. `log(n!) \in \Theta(nlog\n\)`
  Upper bound
    `log(n!) = log(n \cdot n-1 \cdot ... \cdot 1) = log(n) + log(n-1) + ... + log(1) = \sum_i=1^n log(i)`
            
@@ -223,9 +223,9 @@ for i = 1 to n/3
       m = i*j*k
 #+END_SRC
 
-`\sum_i=1^n/3\sum_j=n/3^2n/3\sum_k=2n/3^n(c)`
-`= \sum_{i=1}^n/3\sum_j=n/3^2n/3(cn/3)`
-`= \sum_i=1^n/3(cn^2/9) = cn^3/27 \in \Theta(n^3)`
+`\sum_{i=1}^{n/3} sum_{j=n/3}^{2n/3} sum_{k=2n/3}^n(c)`
+`= sum_{i=1}^{n/3} sum_j={n/3}^{2n/3}(cn/3)`
+`= \sum_{i=1}^{n/3}(cn^2/9) = cn^3/27 \in \Theta(n^3)`
 
 *** Problem 6. Algorithm Analysis (Harder)
 #+BEGIN_SRC pseudo
@@ -239,11 +239,12 @@ After `t` iterations of the while loop `j` will be `i*2^t.`
 Suppose `t` is the final iteration: `n leq j = i\cdot2^t`
   `log n leq log(i\cdot2^t) = log(i)+log(2^t) = log(i) + t`
   
-`\rarr t \ge log(n) - log(i)`
+  `\rarr t \ge log(n) - log(i)`
 
-`\rarr t \ge log(n/i)`
+  `\rarr t \ge log(n/i)`
 
 So we have
+
 `\sum_i=1^n log(n/i)`
 
 `= \sum_i=1^n log(n) - log(i)`
@@ -252,8 +253,8 @@ So we have
 
 `= nlog(n) - log(n!)`
 
-Note: n! > (n/e)^n
-`nlog(n) = log(n!) \approx nlogn - log((n/e)^n) = nlogn - n log(n/e) = nlogn - nlogn - nloge = nlog(e) \in \Theta(n)`
+Note: `n! > (n/e)^n`
+`nlog(n) = log(n!) \approx nlogn - log((n/e)^n) = nlog\n\ - n log(n/e) = nlog\n\ - nlog\n\ - nlog\e\ = nlog\e\ \in \Theta(n)`
 
 *** Notes about Assignment 1
 - Difficult questions:
