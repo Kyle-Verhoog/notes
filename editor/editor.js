@@ -35,7 +35,7 @@ $(function () {
   $orgInputArea.on("input", updateHTML);
 
   $.ajax({
-    url: "./notes/CS240,
+    url: "./notes/CS240",
     dataType: "text"
   }).done(function (data, sattus, $xhr) {
     setCode(data, true);
