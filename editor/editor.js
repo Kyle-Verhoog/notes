@@ -44,4 +44,5 @@ $(function () {
   });
 
   updateHTML();
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub,"result"]);
 });
