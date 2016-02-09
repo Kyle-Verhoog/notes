@@ -30,6 +30,7 @@ $(function () {
   function updateHTML() {
     setHTMLFromCode(getCode());
     prettyPrint();
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"result"]);
   }
 
   $orgInputArea.on("input", updateHTML);
@@ -37,7 +38,7 @@ $(function () {
   $.ajax({
     url: "./notes/CS240",
     dataType: "text"
-  }).done(function (data, sattus, $xhr) {
+  }).done(function (data, status, $xhr) {
     setCode(data, true);
   }).fail(function ($xhr, status, error) {
     alert("error: " + status);
