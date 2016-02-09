@@ -7,9 +7,9 @@ DEADLINE: <2016-01-20 Wed 17:00>
 * Notes 
 ** Module 1: Intro to Asymptotic Analysis [2016-01-05 Tues]
 *** Example of Order Notation (Side 23)
-f(n) = 2n^2 + 3n + 11 \in O(n^2)
+`f(n) = 2n^2 + 3n + 11 \in O(n^2)`
 In order to prove, we need to show the existence of a constant c and n_0 
-\forall.n \ge 1,  m^2 \ge n \ge 1
+`\forall.n \ge 1,  m^2 \ge n \ge 1`
 \rarr 11 \le 11n^2
 \rarr 3n \le 3n^2
 \rarr 2n^2 \le 2n^2 \rarr f(n) \le 16n^2 
